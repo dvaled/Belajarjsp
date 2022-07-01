@@ -17,6 +17,9 @@ public class ProductModel {
     private String expired;
 
     public void setExpired(String expired) {
+        String[] splitted = expired.split("/");
+        expired = splitted[2] + "-" + splitted[0] + "-" + splitted[1];
+        
         this.expired = expired;
     }
 
@@ -54,5 +57,6 @@ public class ProductModel {
 
     public String getType() {
         return type;
-    } 
+    }
+   
 }

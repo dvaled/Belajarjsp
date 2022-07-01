@@ -6,20 +6,50 @@
 package controller;
 
 import Query.ProductQuery;
+import helper.StringHelper;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
+import model.ProductModel;
 
 /**
  *
  * @author DAVA
  */
-public class ProductController {
+public class ProductController extends BaseController {
     ProductQuery query = new ProductQuery();
     
     public ResultSet get() {
-        String sql = this.query.get;
-        return this.get(sql);
+        
+        String sql;
+        sql = this.query.get;
+        return this.get(sql) ;
         
         
+    }
+    
+    public boolean create(ProductModel model) throws ParseException {
+        
+        Map<Integer, Object> map = new HashMap<>();
+        map.put(1, model.getName());
+        map.put(2, model.getType());
+        map.put(3, model.getStock());
+        map.put(4, model.getPrice());
+        map.put(5, model.getExpired());
+        
+        String sql = this.query.create;
+        
+        return this.preparedStatement(map, sql);
+    }
+    
+    public ResultSet getByName(String name) {
+        String sql = this.query.getByName;
+        
+        Map<Integer, Object> map = new HashMap<>();
+        map.put(1, StringHelper.parseLikeQuery(name));
+        
+        return this.getWithParameter(map, sql);
     }
     
 }
