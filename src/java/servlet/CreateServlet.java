@@ -20,7 +20,7 @@ import model.ProductModel;
  *
  * @author DAVA
  */
-@WebServlet(name = "CreateServlet", urlPatterns = {"/Create"})
+@WebServlet(name = "CreateServlet", urlPatterns = {"/views/Create"})
 public class CreateServlet extends HttpServlet {
 
     /**
